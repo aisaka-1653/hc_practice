@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'name_changer'
+
 class Pokemon
+  include NameChanger
+
   attr_reader :name, :type1, :type2, :hp
 
   def initialize(name, type1, type2, hp)
@@ -26,5 +30,15 @@ class Bomanda < Pokemon
 
   def attack
     "#{@name}のドラゴンクロー"
+  end
+end
+
+class Kairyu < Pokemon
+  def initialize(*)
+    super
+  end
+
+  def attack
+    "#{@name}のドラゴンダイブ"
   end
 end
