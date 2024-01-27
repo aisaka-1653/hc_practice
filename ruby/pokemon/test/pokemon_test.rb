@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/pokemon'
+require_relative '../lib/pokemon_sub'
 
 class PokemonTest < Minitest::Test
   def setup
