@@ -1,0 +1,74 @@
+[users] {bgcolor: "#c6ecf5"}
+  *id {label: "bigint, not null"}
+  name {label: "varchar(15), not null, uniq"}
+  email {label: "varchar(100), not null, uniq" }
+  mobile_number {label: "varchar(30), uniq"}
+  display_name {label: "varchar(50), not null"}
+  bio {label: "varchar(160)"}
+  location {label: "varchar(100)"}
+  web_site {label: "varchar(100)"}
+  date_of_birth {label: "datetime, not null"}
+  profile_image {label: "varchar(512)"}
+  header_image {label: "varchar(512)"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[tweets] {bgcolor: "#baf5e3"}
+  *id {label: "bigint, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  content {label: "varchar(140), not null"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[likes] {bgcolor: "#dcf2df"}
+  *id {label: "bigint, not null"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  user_id {label: "bigint, not null, FK(users)"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[retweets] {bgcolor: "#dcf2df"}
+  *id {label: "bigint, not null"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  user_id {label: "bigint, not null, FK(users)"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[bookmarks] {bgcolor: "#dcf2df"}
+  *id {label: "bigint, not null"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  user_id {label: "bigint, not null, FK(users)"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[follows] {bgcolor: "#fae1c3"}
+  *id {label: "bigint, not null"}
+  followee_id {label: "bigint, not null, FK(users)"}
+  follower_id {label: "bigint, not null, FK(users)"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+[direct_messages] {bgcolor: "#fae1c3"}
+  *id {label: "bigint, not null"}
+  sender_id {label: "bigint, not null, FK(users)"}
+  receiver_id {label: "bigint, not null, FK(users)"}
+  content {label: "varchar(10000), not null"}
+  created_at { label: "datatime, not null"}
+  updated_at { label: "datatime, not null"}
+
+# Cardinality    Syntax
+# 0 or 1         ?
+# exactly 1      1
+# 0 or more      *
+# 1 or more      +
+
+users 1--* `tweets`
+users 1--* `likes`
+users 1--* `retweets`
+users 1--* `bookmarks`
+users 1--* `follows`
+users 1--* `direct_messages`
+
+tweets 1--* `likes`
+tweets 1--* `retweets`
+tweets 1--* `bookmarks`
